@@ -1,11 +1,17 @@
-const express=require('express');
-const app=express();
-const calculator=require("./calculator");
+const express = require('express');
+const app = express();
+const cal = require('./calculator');
 
-app.get("/sum",(req,res)=>{
-var valor=calculator.add(parseInt(req.query.valor1),parseInt(req.query.valor2));
-console.log(req.query);
-res.send(JSON.stringify(valor));
-})
+app.get('/add', (req, res) => {
+    res.json({
+        result: cal.add(parseInt(req.query.value1), parseInt(req.query.value2))
+    });
+});
 
-module.exports=app;
+app.get('/subtract', (req, res) => {
+    res.json({
+        result: cal.subtract(parseInt(req.query.value1), parseInt(req.query.value2))
+    });
+});
+
+module.exports = app;
